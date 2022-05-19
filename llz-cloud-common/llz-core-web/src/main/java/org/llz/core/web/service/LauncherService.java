@@ -1,8 +1,10 @@
 package org.llz.core.web.service;
 
+import org.llz.annotation.base.SPI;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.core.Ordered;
 
+@SPI
 public interface LauncherService extends Ordered,Comparable<LauncherService> {
 
 

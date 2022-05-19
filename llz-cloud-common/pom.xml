@@ -16,6 +16,10 @@
         <module>llz-core-web</module>
     </modules>
 
+    <dependencies>
+
+    </dependencies>
+
 
     <build>
         <plugins>

@@ -18,6 +18,11 @@
             <artifactId>llz-core-web</artifactId>
             <version>${revision}</version>
         </dependency>
+        <dependency>
+            <groupId>org.llz</groupId>
+            <artifactId>user-service-api</artifactId>
+            <version>${revision}</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -2,7 +2,6 @@ package org.llz.cloud;
 
 import org.llz.core.web.LlzSpringApplication;
 import org.llz.core.web.constant.AppConstant;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
