@@ -12,7 +12,7 @@
     <modules>
         <module>llz-spring-cloud-dependencies</module>
         <module>llz-cloud-common</module>
-        <module>llz-cloud-common/llz-core-web</module>
+        <module>llz-cloud-service</module>
     </modules>
 
     <properties>
@@ -24,7 +24,6 @@
     </properties>
 
     <dependencyManagement>
-        <!-- Spring Dependencies -->
         <dependencies>
             <dependency>
                 <groupId>org.springframework.boot</groupId>

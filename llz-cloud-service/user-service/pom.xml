@@ -2,47 +2,29 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>llz-cloud-service</artifactId>
+        <groupId>org.llz</groupId>
+        <version>${revision}</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.llz</groupId>
     <packaging>pom</packaging>
-    <version>${revision}</version>
-    <description>依赖版本统一管理</description>
-    <artifactId>llz-spring-cloud-dependencies</artifactId>
-    <properties>
-        <!-- 编码以及默认版本号 -->
-        <revision>1.0-SNAPSHOT</revision>
-        <spring-cloud-starter-alibaba-nacos-version>2021.1</spring-cloud-starter-alibaba-nacos-version>
-        <nacos-client>2.0.3</nacos-client>
-    </properties>
-    <dependencyManagement>
+    <artifactId>user-service</artifactId>
+    <description>用户服务模块</description>
+    <modules>
+        <module>api</module>
+        <module>web</module>
+    </modules>
 
-        <dependencies>
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-                <version>${spring-cloud-starter-alibaba-nacos-version}</version>
-            </dependency>
 
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-                <version>${spring-cloud-starter-alibaba-nacos-version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.alibaba.nacos</groupId>
-                <artifactId>nacos-client</artifactId>
-                <version>${nacos-client}</version>
-            </dependency>
-        </dependencies>
-
-    </dependencyManagement>
     <build>
         <plugins>
+            <!-- 添加flatten-maven-plugin插件 -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
-                <version>1.2.7</version>
+                <version>${flatten-maven-plugin.version}</version>
                 <configuration>
                     <updatePomFile>true</updatePomFile>
                     <flattenMode>resolveCiFriendliesOnly</flattenMode>

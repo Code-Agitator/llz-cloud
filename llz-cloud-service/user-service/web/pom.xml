@@ -3,22 +3,26 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>llz-cloud</artifactId>
+        <artifactId>user-service</artifactId>
         <groupId>org.llz</groupId>
         <version>${revision}</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <packaging>pom</packaging>
-    <description>公用插拔模块</description>
-    <artifactId>llz-cloud-common</artifactId>
 
-    <modules>
-        <module>llz-core-web</module>
-    </modules>
+    <artifactId>user-service-web</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.llz</groupId>
+            <artifactId>llz-core-web</artifactId>
+            <version>${revision}</version>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
+            <!-- 添加flatten-maven-plugin插件 -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
@@ -46,4 +50,6 @@
             </plugin>
         </plugins>
     </build>
+
+
 </project>
