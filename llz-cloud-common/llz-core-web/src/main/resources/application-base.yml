@@ -2,9 +2,10 @@ spring:
   cloud:
     nacos:
       config:
-        # 配置文件前缀
-        prefix: llz
         # 配置文件扩展名
         file-extension: yml
-  profiles:
-    active: dev
+
+
+
+
+

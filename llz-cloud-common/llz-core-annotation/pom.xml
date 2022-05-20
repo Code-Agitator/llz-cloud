@@ -22,7 +22,7 @@
             <artifactId>tools</artifactId>
             <scope>system</scope>
             <systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
-            <version>1.5.0</version>
+            <version>1.8</version>
         </dependency>
 
     </dependencies>
@@ -42,6 +42,8 @@
                     <compilerArgument>-proc:none</compilerArgument>
                 </configuration>
             </plugin>
+
+
             <!-- 添加flatten-maven-plugin插件 -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

@@ -16,7 +16,6 @@ import java.util.*;
 
 @SupportedAnnotationTypes("org.llz.annotation.base.SPIAuto")
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-@Slf4j
 public class SPIAutoProcessor extends AbstractProcessor {
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
@@ -50,12 +49,13 @@ public class SPIAutoProcessor extends AbstractProcessor {
             Set<String> newLines = entry.getValue();
             try {
                 FileObject existingFile = filer.getResource(StandardLocation.CLASS_OUTPUT, "", fullFilePath);
+
                 Set<String> oldLines = readAllLines(existingFile.openInputStream());
                 newLines.addAll(oldLines);
                 write(newLines, existingFile.openOutputStream());
                 return;
-            } catch (IOException e) {
-                // 文件不存在
+            } catch (IOException | IllegalStateException e) {
+                System.out.println("文件不存在，重新创建");
             }
 
 
@@ -65,7 +65,7 @@ public class SPIAutoProcessor extends AbstractProcessor {
                 OutputStream outputStream = newFile.openOutputStream();
                 write(newLines, outputStream);
             } catch (IOException e) {
-
+                System.out.println("重新创建失败，请检查:" + e.getMessage());
             }
         }
     }
@@ -88,8 +88,6 @@ public class SPIAutoProcessor extends AbstractProcessor {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            inputStream.close();
         }
         return lines;
 

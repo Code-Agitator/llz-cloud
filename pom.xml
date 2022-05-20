@@ -14,6 +14,7 @@
         <module>llz-cloud-common</module>
         <module>llz-cloud-service</module>
         <module>llz-cloud-common/llz-core-annotation</module>
+        <module>llz-cloud-common/llz-core-mybatis</module>
     </modules>
 
     <properties>

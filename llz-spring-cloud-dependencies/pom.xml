@@ -13,6 +13,7 @@
         <revision>1.0-SNAPSHOT</revision>
         <spring-cloud-starter-alibaba-nacos-version>2021.1</spring-cloud-starter-alibaba-nacos-version>
         <nacos-client>2.0.3</nacos-client>
+        <mybatis-plus.version>3.5.1</mybatis-plus.version>
     </properties>
     <dependencyManagement>
 
@@ -33,6 +34,11 @@
                 <groupId>com.alibaba.nacos</groupId>
                 <artifactId>nacos-client</artifactId>
                 <version>${nacos-client}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
             </dependency>
         </dependencies>
 
