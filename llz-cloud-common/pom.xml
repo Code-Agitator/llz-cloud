@@ -14,10 +14,17 @@
 
     <modules>
         <module>llz-core-web</module>
+        <module>llz-core-annotation</module>
+        <module>llz-core-mybatis</module>
+        <module>llz-core-auth</module>
+        <module>llz-core-common</module>
     </modules>
 
     <dependencies>
-
+        <dependency>
+            <groupId>com.nimbusds</groupId>
+            <artifactId>nimbus-jose-jwt</artifactId>
+        </dependency>
     </dependencies>
 
 

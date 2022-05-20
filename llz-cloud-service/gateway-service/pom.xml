@@ -3,20 +3,15 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>llz-cloud</artifactId>
+        <artifactId>llz-cloud-service</artifactId>
         <groupId>org.llz</groupId>
         <version>${revision}</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <packaging>pom</packaging>
-    <artifactId>llz-cloud-service</artifactId>
-    <description>业务父模块</description>
+    <artifactId>gateway-service</artifactId>
 
-    <modules>
-        <module>user-service</module>
-        <module>gateway-service</module>
-    </modules>
 
     <build>
         <plugins>

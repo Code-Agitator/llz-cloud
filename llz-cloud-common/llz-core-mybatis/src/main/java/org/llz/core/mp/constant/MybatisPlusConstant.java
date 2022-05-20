@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MybatisPlusConstant {
+    private MybatisPlusConstant(){
+
+    }
     private static final boolean LOG_DEV_ENABLE = true;
     private static final Map<String, Boolean> LOG_MAP = new HashMap<>(3);
 
