@@ -12,7 +12,41 @@
 
     <artifactId>gateway-service</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.llz</groupId>
+            <artifactId>llz-core-auth</artifactId>
+            <version>${revision}</version>
+        </dependency>
 
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.llz</groupId>
+            <artifactId>llz-core-web</artifactId>
+            <version>${revision}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!--fegin组件-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <!-- Feign Client for loadBalancing -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-loadbalancer</artifactId>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <!-- 添加flatten-maven-plugin插件 -->
