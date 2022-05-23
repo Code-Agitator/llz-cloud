@@ -1,13 +1,13 @@
 package org.llz.annotation.spi;
 
-import com.sun.tools.javac.code.Symbol;
-import com.sun.tools.javac.code.Type;
 import org.llz.annotation.base.BaseAbstractProcessor;
 
 import javax.annotation.processing.*;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
+import javax.lang.model.type.DeclaredType;
+import javax.lang.model.type.TypeMirror;
 import javax.tools.FileObject;
 import javax.tools.StandardLocation;
 import java.io.*;
@@ -21,22 +21,23 @@ public class SPIAutoProcessor extends BaseAbstractProcessor {
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         List<Element> classList = getClassList(roundEnv, SPIAuto.class);
 
-        Map<String, Set<String>> spiClassMap = new HashMap<>();
-        for (Element clazz : classList) {
-
-            // 获取对应的SPI接口
-            String spiInterfaceName = getSpiClassName(clazz);
-            String spiClassName = ((Symbol.ClassSymbol) clazz).fullname.toString();
-            SPIAuto spiAuto = ((Symbol.ClassSymbol) clazz).getAnnotation(SPIAuto.class);
-            String filePath = spiAuto.dir() + spiInterfaceName;
-            Set<String> lineSet = spiClassMap.get(filePath);
-            if (lineSet == null) {
-                lineSet = new HashSet<>();
+        if (classList.size() > 0) {
+            Map<String, Set<String>> spiClassMap = new HashMap<>();
+            for (Element clazz : classList) {
+                // 获取对应的SPI接口
+                String spiInterfaceName = getSpiClassName(clazz);
+                String spiClassName = clazz.toString();
+                SPIAuto spiAuto = clazz.getAnnotation(SPIAuto.class);
+                String filePath = spiAuto.dir() + spiInterfaceName;
+                Set<String> lineSet = spiClassMap.get(filePath);
+                if (lineSet == null) {
+                    lineSet = new HashSet<>();
+                }
+                lineSet.add(spiClassName);
+                spiClassMap.put(filePath, lineSet);
             }
-            lineSet.add(spiClassName);
-            spiClassMap.put(filePath, lineSet);
+            generateNewFiles(spiClassMap);
         }
-        generateNewFiles(spiClassMap);
 
         return true;
     }
@@ -56,6 +57,7 @@ public class SPIAutoProcessor extends BaseAbstractProcessor {
                 return;
             } catch (IOException | IllegalStateException e) {
                 System.out.println("文件不存在，重新创建");
+                e.printStackTrace();
             }
 
 
@@ -70,13 +72,6 @@ public class SPIAutoProcessor extends BaseAbstractProcessor {
         }
     }
 
-    private void write(Set<String> newLines, OutputStream writer) throws IOException {
-
-        for (String line : newLines) {
-            writer.write((line + "\n").getBytes());
-        }
-
-    }
 
     private Set<String> readAllLines(InputStream inputStream) throws IOException {
         Set<String> lines = new HashSet<>();
@@ -90,19 +85,28 @@ public class SPIAutoProcessor extends BaseAbstractProcessor {
             e.printStackTrace();
         }
         return lines;
+    }
+
+    private void write(Set<String> newLines, OutputStream writer) throws IOException {
+
+        for (String line : newLines) {
+            writer.write((line + "\n").getBytes());
+        }
 
     }
 
+
     private String getSpiClassName(Element clazz) {
-        com.sun.tools.javac.util.List<Type> interfaces = ((Symbol.ClassSymbol) clazz).getInterfaces();
+//        com.sun.tools.javac.util.List<Type> interfaces = ((Symbol.ClassSymbol) clazz).getInterfaces();
+        final List<? extends TypeMirror> interfaces = ((TypeElement) clazz).getInterfaces();
         if (interfaces.size() == 0) {
             return "";
         }
 
 
-        for (Type interface_ : interfaces) {
-            if (interface_.tsym.getAnnotation(SPI.class) != null) {
-                return ((Symbol.ClassSymbol) interface_.tsym).fullname.toString();
+        for (TypeMirror interface_ : interfaces) {
+            if (((DeclaredType) interface_).asElement().getAnnotation(SPI.class) != null) {
+                return interface_.toString();
             }
         }
         return "";

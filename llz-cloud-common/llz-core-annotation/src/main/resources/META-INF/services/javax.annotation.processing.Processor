@@ -1,1 +1,2 @@
-org.llz.annotation.base.spi.SPIAutoProcessor
+org.llz.annotation.spi.SPIAutoProcessor
+org.llz.annotation.spf.SpringFactoriesAutoProcessor
