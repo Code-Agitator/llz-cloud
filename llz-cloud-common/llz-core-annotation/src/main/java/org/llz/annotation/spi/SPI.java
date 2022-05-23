@@ -1,4 +1,4 @@
-package org.llz.annotation.base;
+package org.llz.annotation.spi;
 
 import java.lang.annotation.*;
 

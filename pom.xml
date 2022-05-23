@@ -13,7 +13,6 @@
         <module>llz-spring-cloud-dependencies</module>
         <module>llz-cloud-common</module>
         <module>llz-cloud-service</module>
-        <module>llz-cloud-service/user-dynamic-service</module>
     </modules>
 
     <properties>

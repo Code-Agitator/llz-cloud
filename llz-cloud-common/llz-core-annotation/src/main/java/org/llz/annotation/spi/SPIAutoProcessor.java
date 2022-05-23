@@ -1,8 +1,8 @@
-package org.llz.annotation.base;
+package org.llz.annotation.spi;
 
 import com.sun.tools.javac.code.Symbol;
 import com.sun.tools.javac.code.Type;
-import lombok.extern.slf4j.Slf4j;
+import org.llz.annotation.base.BaseAbstractProcessor;
 
 import javax.annotation.processing.*;
 import javax.lang.model.SourceVersion;
@@ -14,9 +14,9 @@ import java.io.*;
 import java.lang.annotation.Annotation;
 import java.util.*;
 
-@SupportedAnnotationTypes("org.llz.annotation.base.SPIAuto")
+@SupportedAnnotationTypes("org.llz.annotation.spi.SPIAuto")
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-public class SPIAutoProcessor extends AbstractProcessor {
+public class SPIAutoProcessor extends BaseAbstractProcessor {
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         List<Element> classList = getClassList(roundEnv, SPIAuto.class);
@@ -109,18 +109,4 @@ public class SPIAutoProcessor extends AbstractProcessor {
 
     }
 
-    /**
-     * 获取所有被@SPIAuto注解的类
-     */
-    protected List<Element> getClassList(RoundEnvironment roundEnv, Class<? extends Annotation> clazz) {
-        Set<? extends Element> elements = roundEnv.getElementsAnnotatedWith(clazz);
-        List<Element> classList = new ArrayList<>();
-
-        for (Element element : elements) {
-            if (element instanceof Symbol.ClassSymbol) {
-                classList.add(element);
-            }
-        }
-        return classList;
-    }
 }
