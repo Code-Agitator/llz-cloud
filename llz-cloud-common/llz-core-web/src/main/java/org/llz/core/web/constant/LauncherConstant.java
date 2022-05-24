@@ -15,7 +15,7 @@ public class LauncherConstant {
 
     static {
         NACOS_ADDR_MAP = new HashMap<>(3);
-        NACOS_ADDR_MAP.put("dev", "192.168.113.208:8848");
+        NACOS_ADDR_MAP.put("dev", "192.168.112.188:8848");
     }
 
     public static String nacosAddr(String profile) {

@@ -1,12 +1,10 @@
 package org.llz.core.web;
 
+import org.llz.annotation.spi.launcher.LauncherService;
 import org.llz.core.web.constant.AppConstant;
-import org.llz.core.web.service.LauncherService;
-import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.*;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.StringUtils;
 
 import java.util.*;

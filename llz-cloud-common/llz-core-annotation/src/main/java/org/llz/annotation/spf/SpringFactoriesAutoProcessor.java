@@ -67,9 +67,7 @@ public class SpringFactoriesAutoProcessor extends BaseAbstractProcessor {
         if (isNew) {
             openOutputStream.write("org.springframework.boot.autoconfigure.EnableAutoConfiguration=".getBytes());
         }
-        for (String line : lines) {
-            openOutputStream.write(("," + line).getBytes());
-        }
+        openOutputStream.write(String.join(",", lines).getBytes());
     }
 
 

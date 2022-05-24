@@ -8,6 +8,5 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class UserServiceApplication {
     public static void main(String[] args) {
         LlzSpringApplication.run(AppConstant.USER_SERVICE, UserServiceApplication.class, args);
-        System.out.println(System.getProperty("mybatis-plus.configuration.log-impl"));
     }
 }

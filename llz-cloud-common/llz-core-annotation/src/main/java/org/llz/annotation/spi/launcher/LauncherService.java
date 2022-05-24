@@ -1,7 +1,6 @@
-package org.llz.core.web.service;
+package org.llz.annotation.spi.launcher;
 
 import org.llz.annotation.spi.SPI;
-import org.llz.core.web.LlzSpringApplication;
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.core.Ordered;
@@ -47,7 +46,7 @@ public interface LauncherService extends Ordered, Comparable<LauncherService> {
 
     default void loadFromResource(String fileName, Properties props) {
         YamlPropertiesFactoryBean factoryBean = new YamlPropertiesFactoryBean();
-        factoryBean.setResources(new ClassPathResource(fileName, LlzSpringApplication.class.getClassLoader()));
+        factoryBean.setResources(new ClassPathResource(fileName, LauncherService.class.getClassLoader()));
         Properties object = factoryBean.getObject();
         Assert.notNull(object, String.format("基础配置文件({%s})为null", fileName));
         object.keySet().forEach(key -> props.setProperty(key.toString(), object.getProperty(key.toString())));

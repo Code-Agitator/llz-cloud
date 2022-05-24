@@ -1,8 +1,8 @@
 package org.llz.core.web.service.launcher;
 
 import org.llz.annotation.spi.SPIAuto;
+import org.llz.annotation.spi.launcher.LauncherService;
 import org.llz.core.web.constant.LauncherConstant;
-import org.llz.core.web.service.LauncherService;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
 import java.util.Properties;

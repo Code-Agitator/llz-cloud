@@ -22,14 +22,8 @@
         </dependency>
         <dependency>
             <groupId>org.llz</groupId>
-            <artifactId>llz-core-web</artifactId>
+            <artifactId>llz-core-annotation</artifactId>
             <version>${revision}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-web</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
     </dependencies>
 

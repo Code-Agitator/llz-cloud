@@ -13,18 +13,14 @@
     <artifactId>llz-core-annotation</artifactId>
     <packaging>jar</packaging>
     <properties>
-        <JAVA_HOME>D:\Program Files\Java\jdk1.8.0_333</JAVA_HOME>
     </properties>
 
     <dependencies>
-        <!--        <dependency>-->
-        <!--            <groupId>com.sun</groupId>-->
-        <!--            <artifactId>tools</artifactId>-->
-        <!--            <scope>system</scope>-->
-        <!--            <systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>-->
-        <!--            <version>1.8</version>-->
-        <!--        </dependency>-->
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot</artifactId>
+        </dependency>
     </dependencies>
 
 
