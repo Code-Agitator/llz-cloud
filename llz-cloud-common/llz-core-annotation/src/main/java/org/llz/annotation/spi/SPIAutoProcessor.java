@@ -11,17 +11,19 @@ import javax.lang.model.type.TypeMirror;
 import javax.tools.FileObject;
 import javax.tools.StandardLocation;
 import java.io.*;
-import java.lang.annotation.Annotation;
 import java.util.*;
+import java.util.logging.Logger;
 
 @SupportedAnnotationTypes("org.llz.annotation.spi.SPIAuto")
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class SPIAutoProcessor extends BaseAbstractProcessor {
+    Logger logger = Logger.getLogger(SPIAutoProcessor.class.getName());
+
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         List<Element> classList = getClassList(roundEnv, SPIAuto.class);
 
-        if (classList.size() > 0) {
+        if (!classList.isEmpty()) {
             Map<String, Set<String>> spiClassMap = new HashMap<>();
             for (Element clazz : classList) {
                 // 获取对应的SPI接口
@@ -56,8 +58,7 @@ public class SPIAutoProcessor extends BaseAbstractProcessor {
                 write(newLines, existingFile.openOutputStream());
                 return;
             } catch (IOException | IllegalStateException e) {
-                System.out.println("文件不存在，重新创建");
-                e.printStackTrace();
+                logger.info("文件不存在，重新创建,message:" + e.getMessage());
             }
 
 
@@ -67,25 +68,13 @@ public class SPIAutoProcessor extends BaseAbstractProcessor {
                 OutputStream outputStream = newFile.openOutputStream();
                 write(newLines, outputStream);
             } catch (IOException e) {
-                System.out.println("重新创建失败，请检查:" + e.getMessage());
+                logger.info("重新创建失败，请检查,message:" + e.getMessage());
             }
         }
     }
 
 
-    private Set<String> readAllLines(InputStream inputStream) throws IOException {
-        Set<String> lines = new HashSet<>();
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
-            String line;
-            while ((line = br.readLine()) != null) {
-                lines.add(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return lines;
-    }
+
 
     private void write(Set<String> newLines, OutputStream writer) throws IOException {
 
@@ -97,9 +86,8 @@ public class SPIAutoProcessor extends BaseAbstractProcessor {
 
 
     private String getSpiClassName(Element clazz) {
-//        com.sun.tools.javac.util.List<Type> interfaces = ((Symbol.ClassSymbol) clazz).getInterfaces();
         final List<? extends TypeMirror> interfaces = ((TypeElement) clazz).getInterfaces();
-        if (interfaces.size() == 0) {
+        if (interfaces.isEmpty()) {
             return "";
         }
 

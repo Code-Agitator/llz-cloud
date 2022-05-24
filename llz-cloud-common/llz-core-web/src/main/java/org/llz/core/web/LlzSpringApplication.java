@@ -2,6 +2,7 @@ package org.llz.core.web;
 
 import org.llz.annotation.spi.launcher.LauncherService;
 import org.llz.core.web.constant.AppConstant;
+import org.llz.core.web.execption.SpringApplicationBuildException;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.*;
@@ -11,6 +12,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class LlzSpringApplication {
+    private LlzSpringApplication() {
+    }
 
     /**
      * Create an application context
@@ -50,7 +53,7 @@ public class LlzSpringApplication {
             profile = profiles.get(0);
         } else {
             // 同时存在多个环境
-            throw new RuntimeException("同时存在环境变量:[" + StringUtils.arrayToCommaDelimitedString(activeProfiles) + "]");
+            throw new SpringApplicationBuildException("同时存在环境变量:[" + StringUtils.arrayToCommaDelimitedString(activeProfiles) + "]");
         }
 
 

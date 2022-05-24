@@ -21,7 +21,7 @@ public class DefaultFallbackInvocationHandler implements InvocationHandler {
         Class<?> returnType = method.getReturnType();
         // 熔断后响应结果 (留坑
         if (Result.class.isAssignableFrom(returnType)) {
-
+            log.info("留坑");
         }
         throw new FeignSentinelException(String.format("接口%s方法%s请求失败, 触发熔断降级处理", type.getName(), method.getName()));
     }

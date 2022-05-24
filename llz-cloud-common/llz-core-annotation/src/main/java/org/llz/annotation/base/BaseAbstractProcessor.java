@@ -4,7 +4,10 @@ package org.llz.annotation.base;
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.Element;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -22,7 +25,19 @@ public abstract class BaseAbstractProcessor extends AbstractProcessor {
     }
 
 
-
+    protected Set<String> readAllLines(InputStream inputStream) throws IOException {
+        Set<String> lines = new HashSet<>();
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+            while ((line = br.readLine()) != null) {
+                lines.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return lines;
+    }
 
 
 }

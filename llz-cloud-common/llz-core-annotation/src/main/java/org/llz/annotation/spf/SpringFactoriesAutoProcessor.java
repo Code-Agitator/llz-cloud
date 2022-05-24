@@ -1,6 +1,7 @@
 package org.llz.annotation.spf;
 
 import org.llz.annotation.base.BaseAbstractProcessor;
+import org.llz.annotation.spi.SPIAutoProcessor;
 
 import javax.annotation.processing.Filer;
 import javax.annotation.processing.RoundEnvironment;
@@ -14,21 +15,22 @@ import javax.tools.StandardLocation;
 import java.io.*;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 
 @SupportedAnnotationTypes("org.llz.annotation.spf.SpringFactoriesAuto")
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class SpringFactoriesAutoProcessor extends BaseAbstractProcessor {
+    Logger logger = Logger.getLogger(SpringFactoriesAutoProcessor.class.getName());
 
     private static final String FILE_NAME = "META-INF/spring.factories";
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         List<Element> classList = getClassList(roundEnv, SpringFactoriesAuto.class);
-        if (classList.size() > 0) {
+        if (!classList.isEmpty()) {
             generateNewFiles(classList.stream().map(Element::toString).collect(Collectors.toSet()));
         }
 
@@ -46,8 +48,7 @@ public class SpringFactoriesAutoProcessor extends BaseAbstractProcessor {
             write(new HashSet<>(clzzs), existingFile.openOutputStream(), false);
             return;
         } catch (IOException | IllegalStateException e) {
-            System.out.println("文件不存在，重新创建");
-            e.printStackTrace();
+            logger.info("文件不存在，重新创建,message:" + e.getMessage());
         }
 
         try {
@@ -56,8 +57,7 @@ public class SpringFactoriesAutoProcessor extends BaseAbstractProcessor {
             OutputStream outputStream = newFile.openOutputStream();
             write(new HashSet<>(clzzs), outputStream, true);
         } catch (IOException e) {
-            System.out.println("重新创建失败，请检查:" + e.getMessage());
-            e.printStackTrace();
+            logger.info("重新创建失败，请检查,message:" + e.getMessage());
         }
 
 
@@ -68,21 +68,6 @@ public class SpringFactoriesAutoProcessor extends BaseAbstractProcessor {
             openOutputStream.write("org.springframework.boot.autoconfigure.EnableAutoConfiguration=".getBytes());
         }
         openOutputStream.write(String.join(",", lines).getBytes());
-    }
-
-
-    private Set<String> readAllLines(InputStream inputStream) throws IOException {
-        Set<String> lines = new HashSet<>();
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
-            String line;
-            while ((line = br.readLine()) != null) {
-                lines.add(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return lines;
     }
 
 
