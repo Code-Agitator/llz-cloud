@@ -14,17 +14,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.llz</groupId>
-            <artifactId>llz-core-web</artifactId>
-            <version>${revision}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-web</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-feign</artifactId>
         </dependency>
@@ -33,7 +22,10 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.llz</groupId>
             <artifactId>llz-core-common</artifactId>

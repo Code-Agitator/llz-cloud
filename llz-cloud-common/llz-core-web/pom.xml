@@ -64,6 +64,11 @@
             <version>${revision}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.llz</groupId>
+            <artifactId>llz-core-common</artifactId>
+            <version>${revision}</version>
+        </dependency>
     </dependencies>
 
     <build>

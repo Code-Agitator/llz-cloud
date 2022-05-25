@@ -15,6 +15,11 @@
     <dependencies>
         <dependency>
             <groupId>org.llz</groupId>
+            <artifactId>llz-core-web</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.llz</groupId>
             <artifactId>user-dynamic-service-api</artifactId>
             <version>${revision}</version>
         </dependency>

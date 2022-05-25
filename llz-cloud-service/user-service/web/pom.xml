@@ -32,7 +32,7 @@
 
         <dependency>
             <groupId>org.llz</groupId>
-            <artifactId>llz-core-sentinel</artifactId>
+            <artifactId>user-dynamic-service-api</artifactId>
             <version>${revision}</version>
         </dependency>
     </dependencies>
