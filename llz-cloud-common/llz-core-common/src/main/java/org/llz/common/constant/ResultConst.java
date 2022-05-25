@@ -1,23 +1,23 @@
 package org.llz.common.constant;
 
-public class ResultConst {
-    private ResultConst() {
-    }
+public enum ResultConst {
+    SUCCESS("200", "ok");
 
-    public static class Code {
-        private Code() {
-        }
+    String code;
+    String message;
 
-        /**
-         * 成功
-         */
-        public static final String SUCCESS = "200";
 
-        /**
-         * 未授权
-         */
-        public static final String UNAUTHORIZED = "401";
+    ResultConst(String code, String message) {
+        this.code = code;
+        this.message = message;
     }
 
 
+    public String code() {
+        return code;
+    }
+
+    public String message() {
+        return message;
+    }
 }
