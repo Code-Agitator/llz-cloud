@@ -1,8 +1,15 @@
 package org.llz.common.exception;
 
-public class TokenException extends RuntimeException {
-    public TokenException(String code, Exception message) {
-        super(message);
+import org.llz.common.constant.ResultConst;
 
+public class TokenException extends RuntimeException {
+    public TokenException(ResultConst result, String message) {
+        super(message);
     }
+
+    public TokenException(String result, String message) {
+        super(message);
+    }
+
+
 }

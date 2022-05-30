@@ -12,6 +12,14 @@
 
     <artifactId>llz-core-common</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-core</artifactId>
+            <version>5.8.0</version>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
 
