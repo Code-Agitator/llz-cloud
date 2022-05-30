@@ -1,29 +1,30 @@
 package org.llz.auth.service.impl;
 
 import cn.hutool.core.text.CharSequenceUtil;
-import cn.hutool.core.util.StrUtil;
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;
+import com.nimbusds.jose.util.JSONObjectUtils;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
 import lombok.extern.slf4j.Slf4j;
+
+import net.minidev.json.JSONObject;
+import net.minidev.json.writer.JsonReader;
 import org.llz.auth.properties.JwtTokenManageProperties;
 import org.llz.auth.service.TokenManageService;
 import org.llz.common.constant.ResultConst;
 import org.llz.common.exception.TokenException;
 import org.llz.common.util.TimeUtil;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 import java.text.ParseException;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
 @Slf4j
 public class JwtTokenManageServiceImpl implements TokenManageService {
-    private JwtTokenManageProperties jwtTokenManageProperties;
+    private final JwtTokenManageProperties jwtTokenManageProperties;
 
     public JwtTokenManageServiceImpl(JwtTokenManageProperties jwtTokenManageProperties) {
         Objects.requireNonNull(jwtTokenManageProperties, "缺少Jwt相关的配置");
@@ -63,8 +64,54 @@ public class JwtTokenManageServiceImpl implements TokenManageService {
         if (CharSequenceUtil.isBlank(token)) {
             throw new TokenException(ResultConst.UNAUTHORIZED_NO_TOKEN, "token是空的");
         }
+        SignedJWT signedJWT;
+        try {
+            signedJWT = SignedJWT.parse(token);
+        } catch (ParseException e) {
+            throw new TokenException(ResultConst.UNAUTHORIZED_INVALID, "token无效");
+        }
 
-        return null;
+        if (!isTokenLegal(signedJWT)) {
+            throw new TokenException(ResultConst.UNAUTHORIZED_INVALID, "token无效");
+        }
+
+        if (!ifTokenExpired && isTokenExpired(signedJWT)) {
+            throw new TokenException(ResultConst.UNAUTHORIZED_EXPIRED, "token超时过期");
+        }
+
+        try {
+            final String jsonStr = JWSObject.parse(token).getPayload().toString();
+            final JSONObject jsonObject = JSONObjectUtils.parse(jsonStr);
+            return jsonObject.getAsString("sub");
+        } catch (ParseException e) {
+            throw new TokenException(ResultConst.UNAUTHORIZED_INVALID, "token无效");
+        }
+    }
+
+    private boolean isTokenExpired(String token) {
+        SignedJWT signedJWT;
+        try {
+            signedJWT = SignedJWT.parse(token);
+        } catch (ParseException e) {
+            throw new TokenException(ResultConst.UNAUTHORIZED_NO_TOKEN, "token无效");
+        }
+        return isTokenExpired(signedJWT);
+    }
+
+    private boolean isTokenExpired(SignedJWT signedJWT) {
+        try {
+            JWTClaimsSet claimsSet = signedJWT.getJWTClaimsSet();
+            long time = TimeUtil.now().getTime();
+            final Date expirationTime = claimsSet.getExpirationTime();
+            if (expirationTime == null) {
+                // 永久有效
+                return false;
+            }
+            return time > expirationTime.getTime();
+        } catch (ParseException e) {
+            log.error("检查JWT 过期出错 ", e);
+            throw new TokenException(ResultConst.UNAUTHORIZED_NO_TOKEN, "当前token不合法");
+        }
     }
 
     @Override
@@ -74,9 +121,19 @@ public class JwtTokenManageServiceImpl implements TokenManageService {
         }
         try {
             SignedJWT signedJWT = SignedJWT.parse(token);
+            return isTokenLegal(signedJWT);
+        } catch (ParseException e) {
+            log.error("无效token", e);
+        }
+        return false;
+    }
+
+
+    private boolean isTokenLegal(SignedJWT signedJWT) {
+        try {
             MACVerifier verifier = new MACVerifier(getSecret());
             return verifier.verify(signedJWT.getHeader(), signedJWT.getSigningInput(), signedJWT.getSignature());
-        } catch (ParseException | JOSEException e) {
+        } catch (JOSEException e) {
             log.error("无效token", e);
         }
         return false;
