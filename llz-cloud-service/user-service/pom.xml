@@ -18,6 +18,7 @@
     </modules>
 
 
+
     <build>
         <plugins>
             <!-- 添加flatten-maven-plugin插件 -->

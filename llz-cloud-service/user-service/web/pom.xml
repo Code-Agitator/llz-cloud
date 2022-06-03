@@ -35,6 +35,12 @@
             <artifactId>user-dynamic-service-api</artifactId>
             <version>${revision}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.llz</groupId>
+            <artifactId>llz-core-auth</artifactId>
+            <version>${revision}</version>
+        </dependency>
     </dependencies>
 
     <build>

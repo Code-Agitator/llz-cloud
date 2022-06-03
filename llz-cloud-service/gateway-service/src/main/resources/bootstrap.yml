@@ -1,0 +1,14 @@
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: userService
+          uri: lb://userService
+          predicates:
+            - Path=/user/**
+          filters:
+            - StripPrefix=1
+

@@ -7,6 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class GatewayApplication {
     public static void main(String[] args) {
-        LlzSpringApplication.run(AppConstant.GATEWAY_SERVICE,GatewayApplication.class,args);
+        LlzSpringApplication.run(AppConstant.GATEWAY_SERVICE, GatewayApplication.class, args);
     }
 }
