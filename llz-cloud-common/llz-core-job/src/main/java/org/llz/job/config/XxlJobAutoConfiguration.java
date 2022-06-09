@@ -4,7 +4,9 @@ import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.llz.annotation.spf.SpringFactoriesAuto;
+import org.llz.job.service.XxlJobService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -43,8 +45,13 @@ public class XxlJobAutoConfiguration {
         xxlJobSpringExecutor.setAppname(appname);
         xxlJobSpringExecutor.setAddress(address);
         xxlJobSpringExecutor.setAccessToken(accessToken);
-
         return xxlJobSpringExecutor;
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(XxlJobService.class)
+    public XxlJobService xxlJobService() {
+        return new XxlJobService(adminAddresses, appname);
     }
 
 }

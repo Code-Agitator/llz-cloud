@@ -2,16 +2,18 @@ package org.llz.job.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import lombok.Builder;
 import lombok.Data;
 
 /**
- * 
  * @TableName xxl_job_info
  */
 @Data
+@Builder
 public class XxlJobInfo implements Serializable {
     /**
-     * 
+     *
      */
     private Integer id;
 
@@ -21,17 +23,17 @@ public class XxlJobInfo implements Serializable {
     private Integer jobGroup;
 
     /**
-     * 
+     *
      */
     private String jobDesc;
 
     /**
-     * 
+     *
      */
     private Date addTime;
 
     /**
-     * 
+     *
      */
     private Date updateTime;
 
