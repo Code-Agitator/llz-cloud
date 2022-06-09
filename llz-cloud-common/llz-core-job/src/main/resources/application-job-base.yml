@@ -1,0 +1,18 @@
+# 定时任务中心配置信息
+job:
+  server:
+    enabled: true
+    # 校验令牌，和服务器保持一致
+    accessToken: accessToken
+    userName: admin
+    password: xxx
+    jobGroup: 1
+    admin:
+      # 定时任务中心地址，通过环境变量取值，（预发布环境需填写预发布的域名，不然会调到开发环境的服务）
+      addresses: http://127.0.0.1:8080/xxl-job-admin
+    executor:
+      # 执行器名称
+      appname: middle-executor
+      # 执行器的注册地址
+      address:
+

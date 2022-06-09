@@ -41,6 +41,12 @@
             <artifactId>llz-core-auth</artifactId>
             <version>${revision}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.llz</groupId>
+            <artifactId>llz-core-job</artifactId>
+            <version>${revision}</version>
+        </dependency>
     </dependencies>
 
     <build>

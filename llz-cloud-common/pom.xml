@@ -19,6 +19,7 @@
         <module>llz-core-auth</module>
         <module>llz-core-common</module>
         <module>llz-core-sentinel</module>
+        <module>llz-core-job</module>
     </modules>
 
     <dependencies>

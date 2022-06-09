@@ -10,24 +10,46 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>llz-core-common</artifactId>
+    <artifactId>llz-core-job</artifactId>
 
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
     <dependencies>
         <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-core</artifactId>
+            <groupId>com.xuxueli</groupId>
+            <artifactId>xxl-job-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.llz</groupId>
+            <artifactId>llz-core-annotation</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.llz</groupId>
+            <artifactId>llz-core-common</artifactId>
+            <version>${revision}</version>
         </dependency>
 
         <dependency>
             <groupId>cn.hutool</groupId>
-            <artifactId>hutool-http</artifactId>
+            <artifactId>hutool-json</artifactId>
         </dependency>
-
     </dependencies>
-
     <build>
         <plugins>
-            <!-- 添加flatten-maven-plugin插件 -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
