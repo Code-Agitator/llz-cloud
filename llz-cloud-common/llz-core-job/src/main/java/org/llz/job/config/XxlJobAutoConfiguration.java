@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.llz.config.XxlJobProperties;
+import org.llz.job.config.XxlJobProperties;
 
 @Configuration
 @SpringFactoriesAuto
@@ -38,7 +38,7 @@ public class XxlJobAutoConfiguration {
         return new XxlJobService(
                 xxlJobProperties.getAdminAddresses(),
                 xxlJobProperties.getAppname(),
-                xxlJobProperties.getUserName(),
+                xxlJobProperties.getUsername(),
                 xxlJobProperties.getPassword()
         );
     }

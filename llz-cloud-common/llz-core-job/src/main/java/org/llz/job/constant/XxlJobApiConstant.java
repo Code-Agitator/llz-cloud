@@ -2,7 +2,7 @@ package org.llz.job.constant;
 
 public class XxlJobApiConstant {
     public static final String LOGIN_URL = "/login";
-    public static final String ADD_URL = "/jobinfo/addJob";
+    public static final String ADD_URL = "/jobinfo/add";
     public static final String UPDATE_URL = "/jobinfo/updateJob";
     public static final String REMOVE_URL = "/jobinfo/removeJob";
     public static final String PAUSE_URL = "/jobinfo/pauseJob";

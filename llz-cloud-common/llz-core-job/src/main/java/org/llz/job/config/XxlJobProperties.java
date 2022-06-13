@@ -1,4 +1,4 @@
-package org.llz.config;
+package org.llz.job.config;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,24 +8,24 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Data
 public class XxlJobProperties {
 
-    @Value("${server.admin.addresses}")
+    @Value("${job.server.addresses}")
     private String adminAddresses;
 
-    @Value("${server.accessToken}")
+    @Value("${job.server.accessToken}")
     private String accessToken;
 
-    @Value("${server.executor.appname}")
+    //    @Value("${job.server.executor.appname}")
     private String appname;
 
-    @Value("${server.executor.address}")
+    //    @Value("${job.server.executor.address}")
     private String address;
 
-    @Value("${server.userName}")
-    private String userName;
+    @Value("${job.server.username}")
+    private String username;
 
-    @Value("${server.password}")
+    @Value("${job.server.password}")
     private String password;
 
-    @Value("${server.jobGroup}")
+    @Value("${job.server.jobGroup}")
     private String jobGroup;
 }

@@ -34,6 +34,7 @@ public class HttpUtil {
         return request.execute();
     }
 
+
     public static HttpResponse doPost(String url, String json, List<Pair<String, String>> headers, int timeout) throws HttpRequestException {
         HttpRequest request = HttpRequest.post(url);
 
@@ -44,6 +45,7 @@ public class HttpUtil {
         if (CollUtil.isNotEmpty(headers)) {
             headers.forEach(header -> request.header(header.getKey(), header.getValue()));
         }
+
 
         request.timeout(timeout);
         HttpResponse response = request.execute();
