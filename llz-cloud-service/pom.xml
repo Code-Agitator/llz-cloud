@@ -19,6 +19,15 @@
         <module>user-dynamic-service</module>
     </modules>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.llz</groupId>
+            <artifactId>llz-core-test</artifactId>
+            <version>${revision}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <!-- 添加flatten-maven-plugin插件 -->
