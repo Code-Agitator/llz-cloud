@@ -21,7 +21,7 @@ public class LlzSpringExtension extends SpringExtension {
         LlzSpringBootTest llzSpringBootTest = clazz.getAnnotation(LlzSpringBootTest.class);
 
         if (llzSpringBootTest == null) {
-            throw new LlzSpringBootTestException(String.format("%s must be @BladeBootTest .", clazz));
+            throw new LlzSpringBootTestException(String.format("%s must be @LlzSpringBootTest .", clazz));
         }
         String appName = llzSpringBootTest.appName();
         String profile = llzSpringBootTest.profile();

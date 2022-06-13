@@ -2,7 +2,9 @@ package llz.cloud.core.test;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.annotation.AliasFor;
 
+import javax.swing.*;
 import java.lang.annotation.*;
 
 @Target({ElementType.METHOD, ElementType.TYPE})
@@ -21,5 +23,7 @@ public @interface LlzSpringBootTest {
 
     String profile() default "dev";
 
+    @AliasFor(annotation = SpringBootTest.class)
+    Class<?>[] classes() default {};
 
 }

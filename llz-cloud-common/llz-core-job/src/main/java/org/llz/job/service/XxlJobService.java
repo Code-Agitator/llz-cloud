@@ -1,39 +1,63 @@
 package org.llz.job.service;
 
 import cn.hutool.core.lang.Pair;
-import cn.hutool.json.JSONObject;
+import cn.hutool.http.HttpResponse;
+import cn.hutool.http.HttpStatus;
 import cn.hutool.json.JSONUtil;
+import lombok.extern.slf4j.Slf4j;
+import org.llz.common.exception.HttpRequestException;
 import org.llz.common.util.HttpUtil;
 import org.llz.job.entity.XxlJobInfo;
 
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.llz.job.constant.XxlJobApiConstant.ADD_URL;
-import static org.llz.job.constant.XxlJobApiConstant.GET_GROUP_ID;
+import static org.llz.job.constant.XxlJobApiConstant.LOGIN_URL;
 
 
+@Slf4j
 public class XxlJobService {
-    private String adminAddresses;
+    private final String adminAddresses;
 
-    private String appname;
+    private final String appname;
 
-    public XxlJobService(String adminAddresses, String appname) {
+
+    private final String username;
+
+    private final String password;
+
+
+    private ReentrantLock loginCookieLock;
+
+    public XxlJobService(String adminAddresses, String appname, String username, String password) {
         this.adminAddresses = adminAddresses;
         this.appname = appname;
+        this.username = username;
+        this.password = password;
     }
 
     public String add(XxlJobInfo jobInfo) {
         // 查询对应groupId:
-        String result = HttpUtil.doPost(adminAddresses + GET_GROUP_ID,
-                Stream.of(
-                        new Pair<String, Object>("appname", appname)
-                ).collect(Collectors.toList()));
-        JSONObject json = (JSONObject) JSONUtil.parse(result);
-
-        String groupId = json.getStr("content");
-        jobInfo.setJobGroup(Integer.parseInt(groupId));
+        jobInfo.setJobGroup(1);
         String json2 = JSONUtil.toJsonStr(jobInfo);
-        return HttpUtil.doPost(adminAddresses + ADD_URL, json2);
+        HttpResponse res = null;
+        try {
+            res = HttpUtil.doPost(adminAddresses + ADD_URL, json2);
+        } catch (HttpRequestException requestException) {
+            log.warn("添加任务失败:响应体:{}", requestException.getResponse());
+        }
+        return res.body();
     }
+
+    private String getLoginCookie() {
+        HttpUtil.doPost(adminAddresses + LOGIN_URL, Stream.of(
+                new Pair<String, Object>("username", username),
+                new Pair<String, Object>("password", password)
+        ).collect(Collectors.toList()));
+        return "";
+    }
+
+
 }
