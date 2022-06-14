@@ -28,6 +28,7 @@ public class XxlJobAutoConfiguration {
         xxlJobSpringExecutor.setAdminAddresses(xxlJobProperties.getAdminAddresses());
         xxlJobSpringExecutor.setAppname(xxlJobProperties.getAppname());
         xxlJobSpringExecutor.setAddress(xxlJobProperties.getAddress());
+        xxlJobSpringExecutor.setIp("192.168.2.7");
         xxlJobSpringExecutor.setAccessToken(xxlJobProperties.getAccessToken());
         return xxlJobSpringExecutor;
     }

@@ -14,7 +14,7 @@ public class XxlJobProperties {
     @Value("${job.server.accessToken}")
     private String accessToken;
 
-    //    @Value("${job.server.executor.appname}")
+    @Value("${spring.application.name}")
     private String appname;
 
     //    @Value("${job.server.executor.address}")
