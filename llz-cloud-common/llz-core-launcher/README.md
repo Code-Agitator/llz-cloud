@@ -3,7 +3,7 @@
 ## 目录结构
 
 ```
-org.llz.core.web
+org.llz.core.launcher
 │       │   
 │       └───LlzSpringApplication.java - 重写SpringApplication   
 └─── constant - 常量包

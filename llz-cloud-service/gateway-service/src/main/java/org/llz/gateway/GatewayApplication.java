@@ -1,6 +1,6 @@
 package org.llz.gateway;
 
-import org.llz.core.web.LlzSpringApplication;
+import org.llz.core.launcher.LlzSpringApplication;
 import org.llz.common.constant.AppConstant;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

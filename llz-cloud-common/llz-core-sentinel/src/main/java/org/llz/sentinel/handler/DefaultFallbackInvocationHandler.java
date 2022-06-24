@@ -1,7 +1,6 @@
 package org.llz.sentinel.handler;
 
 import lombok.extern.slf4j.Slf4j;
-import org.llz.common.entity.result.Result;
 import org.llz.sentinel.exception.FeignSentinelException;
 
 import java.lang.reflect.InvocationHandler;
@@ -20,9 +19,7 @@ public class DefaultFallbackInvocationHandler implements InvocationHandler {
         log.error("接口{}方法{}请求失败, 触发熔断降级处理", type.getName(), method.getName());
         Class<?> returnType = method.getReturnType();
         // 熔断后响应结果 (留坑
-        if (Result.class.isAssignableFrom(returnType)) {
-            log.info("留坑");
-        }
+        log.info("留坑");
         throw new FeignSentinelException(String.format("接口%s方法%s请求失败, 触发熔断降级处理", type.getName(), method.getName()));
     }
 

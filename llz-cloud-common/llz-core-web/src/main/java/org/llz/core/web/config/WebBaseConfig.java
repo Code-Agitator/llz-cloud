@@ -9,6 +9,6 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @SpringFactoriesAuto
-@ComponentScan({"org.llz.core.web.interceptor"})
+@ComponentScan({"org.llz.core.launcher.interceptor"})
 public class WebBaseConfig {
 }
