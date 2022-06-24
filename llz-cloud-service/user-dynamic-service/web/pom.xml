@@ -15,7 +15,7 @@
     <dependencies>
         <dependency>
             <groupId>org.llz</groupId>
-            <artifactId>llz-core-web</artifactId>
+            <artifactId>llz-core-launcher</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>

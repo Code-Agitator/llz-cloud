@@ -42,6 +42,7 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
+
         <!-- Feign Client for loadBalancing -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

@@ -18,11 +18,7 @@
             <artifactId>llz-core-mybatis</artifactId>
             <version>${revision}</version>
         </dependency>
-        <dependency>
-            <groupId>org.llz</groupId>
-            <artifactId>llz-core-sentinel</artifactId>
-            <version>${revision}</version>
-        </dependency>
+
     </dependencies>
     <build>
         <plugins>

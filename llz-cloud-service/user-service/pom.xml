@@ -13,7 +13,7 @@
     <artifactId>user-service</artifactId>
     <description>用户服务模块</description>
     <modules>
-        <module>api</module>
+        <module>core</module>
         <module>web</module>
     </modules>
 

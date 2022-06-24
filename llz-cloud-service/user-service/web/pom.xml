@@ -15,12 +15,12 @@
     <dependencies>
         <dependency>
             <groupId>org.llz</groupId>
-            <artifactId>llz-core-web</artifactId>
+            <artifactId>llz-core-launcher</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>org.llz</groupId>
-            <artifactId>user-service-api</artifactId>
+            <artifactId>user-service-core</artifactId>
             <version>${revision}</version>
         </dependency>
 
