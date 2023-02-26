@@ -13,6 +13,7 @@
     <artifactId>llz-cloud-common</artifactId>
 
     <modules>
+        <module>llz-core-launcher</module>
         <module>llz-core-web</module>
         <module>llz-core-annotation</module>
         <module>llz-core-mybatis</module>

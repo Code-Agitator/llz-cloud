@@ -10,7 +10,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.llz.job.config.XxlJobProperties;
 
 @Configuration
 @SpringFactoriesAuto
@@ -28,6 +27,7 @@ public class XxlJobAutoConfiguration {
         xxlJobSpringExecutor.setAdminAddresses(xxlJobProperties.getAdminAddresses());
         xxlJobSpringExecutor.setAppname(xxlJobProperties.getAppname());
         xxlJobSpringExecutor.setAddress(xxlJobProperties.getAddress());
+        xxlJobSpringExecutor.setIp("192.168.2.7");
         xxlJobSpringExecutor.setAccessToken(xxlJobProperties.getAccessToken());
         return xxlJobSpringExecutor;
     }

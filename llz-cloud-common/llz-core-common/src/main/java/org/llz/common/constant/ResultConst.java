@@ -2,9 +2,10 @@ package org.llz.common.constant;
 
 public enum ResultConst {
     SUCCESS("200", "ok"),
-    UNAUTHORIZED_NO_TOKEN("4010", "token不能为空"),
-    UNAUTHORIZED_INVALID("4011", "token不合法"),
-    UNAUTHORIZED_EXPIRED("4012", "token已超时过期");
+    NOT_FOUND("404", "404 NOT FOUND"),
+    UNAUTHORIZED_NO_TOKEN("4010", "token is blank,and require not blank"),
+    UNAUTHORIZED_INVALID("4011", "token is not legal"),
+    UNAUTHORIZED_EXPIRED("4012", "token has been expire");
 
     String code;
     String message;
@@ -14,6 +15,7 @@ public enum ResultConst {
         this.code = code;
         this.message = message;
     }
+
 
 
     public String code() {

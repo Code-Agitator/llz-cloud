@@ -1,5 +1,7 @@
 package org.llz.auth.service;
 
+import org.llz.common.exception.TokenException;
+
 public interface TokenManageService {
     /**
      * @param subject              token携带参数
@@ -16,6 +18,14 @@ public interface TokenManageService {
      * @return token携带参数
      */
     String getSubject(String token, boolean ifTokenExpired);
+
+    /**
+     * 获得token携带参数
+     *
+     * @param token token
+     * @return token携带参数
+     */
+    String getSubject(String token) throws TokenException;
 
     /**
      * 检查token是否合法

@@ -2,7 +2,7 @@ package llz.cloud.core.test;
 
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.llz.annotation.spi.launcher.LauncherService;
-import org.llz.core.web.constant.LauncherConstant;
+import org.llz.core.launcher.constant.LauncherConstant;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 

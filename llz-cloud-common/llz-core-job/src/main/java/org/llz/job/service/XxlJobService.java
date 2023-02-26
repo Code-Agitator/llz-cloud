@@ -16,8 +16,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.llz.job.constant.XxlJobApiConstant.ADD_URL;
-import static org.llz.job.constant.XxlJobApiConstant.LOGIN_URL;
+import static org.llz.job.constant.XxlJobApiConstant.*;
 import static org.llz.job.constant.XxlJobConstant.XXL_LOGIN_COOKIE_KEY;
 
 
@@ -44,8 +43,6 @@ public class XxlJobService {
 
     public String add(XxlJobInfo jobInfo) {
         try {
-            // 查询对应groupId:
-            jobInfo.setJobGroup(1);
             final List<Pair<String, Object>> param = Arrays.stream(jobInfo.getClass().getDeclaredFields())
                     .filter(field -> !field.getName().equals("serialVersionUID"))
                     .map(field -> {
@@ -72,11 +69,30 @@ public class XxlJobService {
         return null;
     }
 
+
+    public String run(Integer jobId) {
+        final String loginCookie = getLoginCookie();
+        if (jobId == null) {
+            log.error("jobId为空");
+            return "";
+        }
+        HttpResponse response = HttpUtil.doPost(adminAddresses + START_URL,
+                Stream.of(
+                        new Pair<String, Object>("id", jobId)
+                ).collect(Collectors.toList()),
+                Stream.of(
+                        new Pair<>("cookie", XXL_LOGIN_COOKIE_KEY + "=" + loginCookie)
+                ).collect(Collectors.toList()));
+        return response.body();
+    }
+
     private String getLoginCookie() {
-        final HttpResponse httpResponse = HttpUtil.doPost(adminAddresses + LOGIN_URL, Stream.of(
-                new Pair<String, Object>("userName", username),
-                new Pair<String, Object>("password", password)
-        ).collect(Collectors.toList()));
+
+        final HttpResponse httpResponse = HttpUtil.doPost(adminAddresses + LOGIN_URL,
+                Stream.of(
+                        new Pair<String, Object>("userName", username),
+                        new Pair<String, Object>("password", password)
+                ).collect(Collectors.toList()));
         return httpResponse.getCookieValue(XXL_LOGIN_COOKIE_KEY);
     }
 

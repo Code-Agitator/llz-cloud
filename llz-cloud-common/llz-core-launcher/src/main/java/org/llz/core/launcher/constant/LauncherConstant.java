@@ -1,4 +1,4 @@
-package org.llz.core.web.constant;
+package org.llz.core.launcher.constant;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -59,23 +59,23 @@ public class JwtTokenManageServiceImpl implements TokenManageService {
     }
 
     @Override
-    public String getSubject(String token, boolean ifTokenExpired) {
+    public String getSubject(String token, boolean ifTokenExpired) throws TokenException {
         if (CharSequenceUtil.isBlank(token)) {
-            throw new TokenException(ResultConst.UNAUTHORIZED_NO_TOKEN, "token是空的");
+            throw new TokenException(ResultConst.UNAUTHORIZED_NO_TOKEN, "token is blank");
         }
         SignedJWT signedJWT;
         try {
             signedJWT = SignedJWT.parse(token);
         } catch (ParseException e) {
-            throw new TokenException(ResultConst.UNAUTHORIZED_INVALID, "token无效");
+            throw new TokenException(ResultConst.UNAUTHORIZED_INVALID, "token parse fail");
         }
 
         if (!isTokenLegal(signedJWT)) {
-            throw new TokenException(ResultConst.UNAUTHORIZED_INVALID, "token无效");
+            throw new TokenException(ResultConst.UNAUTHORIZED_INVALID, "token is not legal");
         }
 
         if (!ifTokenExpired && isTokenExpired(signedJWT)) {
-            throw new TokenException(ResultConst.UNAUTHORIZED_EXPIRED, "token超时过期");
+            throw new TokenException(ResultConst.UNAUTHORIZED_EXPIRED, "token is expired");
         }
 
         try {
@@ -84,8 +84,13 @@ public class JwtTokenManageServiceImpl implements TokenManageService {
             final Map<String, Object> jsonObject = JSONObjectUtils.parse(jsonStr);
             return (String) jsonObject.get("sub");
         } catch (ParseException e) {
-            throw new TokenException(ResultConst.UNAUTHORIZED_INVALID, "token无效");
+            throw new TokenException(ResultConst.UNAUTHORIZED_INVALID, "token parse to json data fail");
         }
+    }
+
+    @Override
+    public String getSubject(String token) {
+        return getSubject(token, true);
     }
 
     private boolean isTokenExpired(String token) {
