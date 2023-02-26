@@ -9,8 +9,6 @@ import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
 import lombok.extern.slf4j.Slf4j;
 
-import net.minidev.json.JSONObject;
-import net.minidev.json.writer.JsonReader;
 import org.llz.auth.properties.JwtTokenManageProperties;
 import org.llz.auth.service.TokenManageService;
 import org.llz.common.constant.ResultConst;
@@ -19,6 +17,7 @@ import org.llz.common.util.TimeUtil;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -81,8 +80,9 @@ public class JwtTokenManageServiceImpl implements TokenManageService {
 
         try {
             final String jsonStr = JWSObject.parse(token).getPayload().toString();
-            final JSONObject jsonObject = JSONObjectUtils.parse(jsonStr);
-            return jsonObject.getAsString("sub");
+
+            final Map<String, Object> jsonObject = JSONObjectUtils.parse(jsonStr);
+            return (String) jsonObject.get("sub");
         } catch (ParseException e) {
             throw new TokenException(ResultConst.UNAUTHORIZED_INVALID, "token无效");
         }

@@ -60,7 +60,7 @@ public class LlzSpringApplication {
         // 加载自定义组件
         List<LauncherService> launcherList = new ArrayList<>();
         ServiceLoader.load(LauncherService.class).forEach(launcherList::add);
-        launcherList.stream().sorted(Comparator.comparing(LauncherService::getOrder)).collect(Collectors.toList())
+        launcherList.stream().sorted(Comparator.comparing(LauncherService::getOrder)).toList()
                 .forEach(launcherService -> launcherService.launcher(builder, appName, profile));
         return builder;
 

@@ -18,11 +18,12 @@
             <artifactId>llz-core-mybatis</artifactId>
             <version>${revision}</version>
         </dependency>
+
         <dependency>
-            <groupId>org.llz</groupId>
-            <artifactId>llz-core-sentinel</artifactId>
-            <version>${revision}</version>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
+
     </dependencies>
     <build>
         <plugins>

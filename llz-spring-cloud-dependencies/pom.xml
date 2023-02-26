@@ -12,10 +12,11 @@
         <!-- 编码以及默认版本号 -->
         <revision>1.0-SNAPSHOT</revision>
         <spring-cloud-starter-alibaba-nacos-version>2021.1</spring-cloud-starter-alibaba-nacos-version>
-        <nacos-client>2.0.3</nacos-client>
+        <nacos-client>2.2.0</nacos-client>
         <mybatis-plus.version>3.5.1</mybatis-plus.version>
         <xxl-job-core.version>2.3.0</xxl-job-core.version>
         <hutool-core.version>5.8.0</hutool-core.version>
+        <nimbus-jose.version>9.31</nimbus-jose.version>
     </properties>
     <dependencyManagement>
 
@@ -77,6 +78,12 @@
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-json</artifactId>
                 <version>${hutool-core.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.nimbusds</groupId>
+                <artifactId>nimbus-jose-jwt</artifactId>
+                <version>${nimbus-jose.version}</version>
             </dependency>
         </dependencies>
 

@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
 
 
 @SupportedAnnotationTypes("org.llz.annotation.spf.SpringFactoriesAuto")
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class SpringFactoriesAutoProcessor extends BaseAbstractProcessor {
     Logger logger = Logger.getLogger(SpringFactoriesAutoProcessor.class.getName());
 

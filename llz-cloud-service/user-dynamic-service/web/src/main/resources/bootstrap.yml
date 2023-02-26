@@ -4,3 +4,5 @@ spring:
     driver-class-name: ${etw.user-service.datasource.driver-class-name}
     password: ${etw.user-service.datasource.password}
     url: ${etw.user-service.datasource.url}
+
+

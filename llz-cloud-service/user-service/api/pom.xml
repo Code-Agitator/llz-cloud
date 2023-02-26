@@ -18,11 +18,7 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.llz</groupId>
-            <artifactId>llz-core-sentinel</artifactId>
-            <version>${revision}</version>
-        </dependency>
+
     </dependencies>
 
     <build>

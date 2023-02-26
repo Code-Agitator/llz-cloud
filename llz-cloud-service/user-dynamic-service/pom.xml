@@ -17,6 +17,7 @@
     </modules>
     <artifactId>user-dynamic-service</artifactId>
 
+
     <build>
         <plugins>
             <plugin>

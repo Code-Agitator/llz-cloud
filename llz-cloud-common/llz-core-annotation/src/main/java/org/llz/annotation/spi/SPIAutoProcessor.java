@@ -15,7 +15,6 @@ import java.util.*;
 import java.util.logging.Logger;
 
 @SupportedAnnotationTypes("org.llz.annotation.spi.SPIAuto")
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class SPIAutoProcessor extends BaseAbstractProcessor {
     Logger logger = Logger.getLogger(SPIAutoProcessor.class.getName());
 
@@ -72,8 +71,6 @@ public class SPIAutoProcessor extends BaseAbstractProcessor {
             }
         }
     }
-
-
 
 
     private void write(Set<String> newLines, OutputStream writer) throws IOException {
